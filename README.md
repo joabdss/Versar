@@ -22,7 +22,5 @@ FLUXO DE EXCEÇÃO
 REGRAS DE NEGÓCIO 
   - Campos obrigatorios: e-mail e senha.
 
-TELAS
-<img width="629" height="612" alt="image" src="https://github.com/user-attachments/assets/05e8bc27-6b1e-4d12-84e7-c8dfbc4addfe" />
 
 
