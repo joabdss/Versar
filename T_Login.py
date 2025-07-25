@@ -1,14 +1,18 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from time import sleep
 
 # Caminho correto para o executável
 caminho_driver = r"C:\Users\Sena\OneDrive\Desktop\webdriver\chromedriver-win32\chromedriver.exe"
 service = Service(caminho_driver)
 
-#Abrir Navegador e Site
 driver = webdriver.Chrome(service=service)
+wait = WebDriverWait(driver, 10)
+
+#Abrir Navegador e Site
 driver.get("https://playful-torrone-162c28.netlify.app")
 sleep(2)
 
@@ -22,6 +26,12 @@ driver.find_element(By.NAME, "password").send_keys("versar123")
 
 #Efetua o Login e entra na página
 driver.find_element(By.TAG_NAME, "form").submit()
+
+#Clicar em '+ Criar Módulo'
+criar_modulo_btn = wait.until(
+    EC.element_to_be_clickable((By.CSS_SELECTOR, 'button.MuiButton-containedPrimary'))
+)
+criar_modulo_btn.click()
 
 
 sleep(10)
