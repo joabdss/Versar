@@ -33,6 +33,24 @@ criar_modulo_btn = wait.until(
 )
 criar_modulo_btn.click()
 
+# Aguarda o campo "Título do Módulo" e preenche
+titulo_input = wait.until(EC.presence_of_element_located((By.XPATH, '//input[@placeholder="Título do Módulo"]')))
+titulo_input.send_keys("Módulo Automatizado QA")
 
+
+#--------------------------- INTERVALO
+# Clica no dropdown de Série
+serie_dropdown = wait.until(EC.element_to_be_clickable((By.XPATH, '//div[@id="mui-component-select-grade"]')))
+serie_dropdown.click()
+
+# Aguarda a lista abrir e seleciona uma opção (ex: "3º Ano")
+# Troque "3º Ano" pelo texto exato da opção desejada
+serie_opcao = wait.until(EC.element_to_be_clickable((By.XPATH, '//li[text()="3º Ano"]')))
+serie_opcao.click()
+
+# Preenche a descrição
+descricao_input = wait.until(EC.presence_of_element_located((By.XPATH, '//textarea[@placeholder="Descrição do Módulo"]')))
+descricao_input.send_keys("Este é um módulo criado automaticamente via Selenium.")
+#----------------------------- INTERVALO
 sleep(10)
 #driver.quit()
