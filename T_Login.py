@@ -57,5 +57,23 @@ botao_estrela = wait.until(EC.element_to_be_clickable(
 ))
 botao_estrela.click()
 
+# Aguarda o botão 'Salvar' final e clica (1)
+botao_salvar_final = wait.until(EC.element_to_be_clickable(
+    (By.XPATH, '//button[.//span[contains(text(),"Salvar")]]')
+))
+botao_salvar_final.click()
+
+# Aguarda o botão 'Salvar' final e clica (2)
+botao_salvar_final = wait.until(EC.element_to_be_clickable(
+    (By.XPATH, '//button[.//span[contains(text(),"Salvar")]]')
+))
+botao_salvar_final.click()
+
+# Aguarda o botão 'Salvar Módulo' final e clica (3)
+botao_salvar_final_modulo = wait.until(EC.element_to_be_clickable(
+    (By.XPATH, '//button[.//span[contains(text(),"Salvar Módulo")]]')
+))
+botao_salvar_final_modulo.click()
+
 sleep(10)
 driver.quit()
