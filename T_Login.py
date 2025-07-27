@@ -3,12 +3,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from webdriver_manager.chrome import ChromeDriverManager
 from time import sleep
 
-# Caminho correto para o executável
-caminho_driver = r"C:\Users\Sena\OneDrive\Desktop\webdriver\chromedriver-win32\chromedriver.exe"
-service = Service(caminho_driver)
-
+service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service)
 wait = WebDriverWait(driver, 10)
 
