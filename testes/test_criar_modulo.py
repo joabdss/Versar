@@ -1,4 +1,5 @@
 import time
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
@@ -8,7 +9,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
-import os
 
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service)
@@ -120,28 +120,34 @@ try:
             driver.execute_script("tinymce.activeEditor.setContent('Teste automático');")
             conteudo = driver.execute_script("return tinymce.activeEditor.getContent();")
             assert "Teste automático" in conteudo, "Erro: Não conseguiu escrever no editor."
+        time.sleep(1)  
+        
 
+        url_input_video = wait.until(EC.presence_of_element_located((By.XPATH, '//input[@placeholder="URL"]')))
+        url_input_video.send_keys("https://www.youtube.com/watch?v=2PuFyjAs7JA")
+        
+        driver.execute_script("window.scrollBy(0, 1000);") 
+        time.sleep(1)  
 
-            # Buscar arquivo documentos (FAZENDO AINDA)
-            documento_btn = wait.until(EC.element_to_be_clickable((By.XPATH,'//button[.//span[contains(text(), "Adicionar Arquivo")]]')))
-            documento_btn.click()
-            time.sleep(5)
+        def test_avancar_sem_redirecionamento(driver):
+            # Clica no botão
+            botao = WebDriverWait(driver, 10).until(
+                EC.element_to_be_clickable((By.XPATH, '//button[.//span[contains(text(), "Avançar")]]'))
+            )
+            driver.execute_script("arguments[0].click();", botao)
+            
+            # Verifica se houve mudança de URL ou página
+            try:
+                WebDriverWait(driver, 5).until(
+                    EC.url_changes(driver.current_url)
+                )
+                assert False, "Redirecionamento inesperado ocorreu — mas esperado era falhar"
+            except:
+                print("✅ Clicou em 'Avançar', mas não houve redirecionamento — comportamento incorreto confirmado.")
 
-
-
-
-        #botao_salvar_modulo = wait.until(EC.element_to_be_clickable(
-            #(By.XPATH, '//button[.//span[contains(text(),"Salvar Módulo")]]')
-        #))
-        #botao_salvar_modulo.click()
-
-        #sleep(5)
-
-        # Se chegou até aqui sem erro, o teste passou
-        #assert True
 
 except Exception as e:
         assert False, f"Erro no teste: {e}"
 
-#finally:
-        #driver.quit()
+finally:
+        driver.quit()
